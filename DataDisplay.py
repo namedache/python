@@ -6,9 +6,11 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 
+
+#对数据进行展示
 def word():
     text = ''
-    removes =['最佳', '表现', '集锦', '狂胜', '回顾', '获胜', '使用','能力','优先','描述','任职']
+    removes =['最佳', '表现', '集锦', '狂胜', '回顾', '获胜', '使用','能力','盖帽','得分','进攻']
     with open('./weibocontent2.txt', 'r') as f:
         text = f.read()
         f.close()
@@ -42,4 +44,6 @@ def word():
     plt.imshow(wc, interpolation='catrom', vmax=1000)
     plt.axis("off")
 
+
+    #展示图片
     wc.to_file("show2.png")

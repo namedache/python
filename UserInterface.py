@@ -3,8 +3,8 @@ import tkinter as tk
 import login
 import re
 from tkinter import messagebox
-import chuli
-import word
+import DataClean
+import DataDisplay
 
 
 class Login(object):
@@ -62,17 +62,18 @@ class Login(object):
         username = self.input_account.get()
         password = self.input_password.get()
         uid = self.input_dest.get()
+        #当密码和用户名正确时进行爬取
         if username and password is not None:
-            if self.panduan(username, password):
-               self.paqu(username, password, uid)
+            if self.judge(username, password):
+               self.crawler(username, password, uid)
             else:
                 tk.messagebox.showerror(message='用户名或密码不符合规范')
         else:
             tk.messagebox.showerror(message='用户名或密码为空')
 
 
-    # 判断函数
-    def panduan(self, username, password):
+    # 用户名密码正则判断
+    def judge(self, username, password):
         # 判断用户名密码是否合法！
         result_name = re.compile(r"(13|14|15|17|18)[0-9]{9}")
         result_nameMail = re.compile(r"/[\w-]+(\.[\w-]+)*@([\w-]+\.)+\w{2,14}/")
@@ -81,16 +82,16 @@ class Login(object):
 
 
     # 爬取函数
-    def paqu(self,username,password,uid):
+    def crawler(self,username,password,uid):
         login.loginWeibo(username, password)
         time.sleep(3)
         login.visitUserInfo(uid)
         result = login.visitWeiboContent(uid)
         if result:
             tk.messagebox.showinfo("爬取完毕！")
-        chuli_result = chuli.qingjie()
+        chuli_result = DataClean.clean()
         if chuli_result:
-            word.word()
+            DataDisplay.word()
 
 
 

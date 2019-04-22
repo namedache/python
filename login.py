@@ -7,7 +7,8 @@ import re
 #全局变量
 driver = webdriver.Chrome("/Users/zhoukun/Downloads/chromedriver")
 
-
+# 登陆微博
+# param usernam,password
 def loginWeibo(username, password):
 
     driver.get('https://passport.weibo.cn/signin/login')
@@ -18,7 +19,8 @@ def loginWeibo(username, password):
     driver.find_element_by_id("loginAction").click()
 
 
-
+# 获得用户资料
+# param userId
 def visitUserInfo(userId):
     driver.get('http://weibo.cn/' + userId)
 
@@ -53,6 +55,8 @@ def visitUserInfo(userId):
         file.write("粉丝数：" + str(cntArr[2]) + '\r\n')
 
 
+# 获得用户发表微博的数据
+# param userId
 def visitWeiboContent(userId):
     pageList = driver.find_element_by_xpath("//div[@class='pa']")
     logging.debug(pageList.text)
@@ -93,6 +97,7 @@ def visitWeiboContent(userId):
 def topmblog():
     driver.get('http://weibo.cn/pub/topmblog')
     cont = driver.find_element_by_xpath("//div[@class='ctt']")
+    pass
 
 
 # 主函数调用

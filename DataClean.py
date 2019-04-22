@@ -1,4 +1,6 @@
-def qingjie():
+
+# 清理数据函数
+def clean():
     fread = open('weibocontent.txt')
     fwrite = open('weibocontent2.txt', 'w')
 
